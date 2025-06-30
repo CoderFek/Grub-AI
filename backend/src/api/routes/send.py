@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.post("/send-poem")
 def send_poem_to_verified_users(background_tasks: BackgroundTasks, session: Annotated[Session, Depends(get_session)]):
-    subscribers = session.exec(select(Subscriber).where(Subscriber.verified == True)).all()
+    subscribers = session.exec(select(Subscriber).where(Subscriber.is_verified == True)).all()
 
     for user in subscribers:
         background_tasks.add_task(send_poem_email, user)

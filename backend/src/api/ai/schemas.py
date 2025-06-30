@@ -13,3 +13,7 @@ class EmailMessageSchema(BaseModel):
     subject: str
     content: str
     invalid_request: bool | None = Field(default=False)
+
+
+class PoemRequest(BaseModel):
+    message: str

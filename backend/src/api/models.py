@@ -15,5 +15,5 @@ class Subscriber(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     email: str = Field(index=True, nullable=False, unique=True)
     is_verified: bool = Field(default=False)
-    vverification_token: str = Field(default_factory=generate_token)
+    verification_token: str = Field(default_factory=generate_token)
     subscribed_at: datetime = Field(default_factory=utcnow)

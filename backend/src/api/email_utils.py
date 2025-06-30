@@ -14,7 +14,7 @@ if not BREVO_API_KEY or not BREVO_SENDER_EMAIL:
 
 def send_verification_email(subscriber: Subscriber) -> None:
     token = subscriber.verification_token
-    verify_link = f"https://{DOMAIN}/verify-email?token={token}"
+    verify_link = f"http://{DOMAIN}/verify-email?token={token}"
 
     data = {
         "sender": {
@@ -47,7 +47,7 @@ def send_verification_email(subscriber: Subscriber) -> None:
 
 
 def send_poem_email(subscriber: Subscriber) -> None:
-    poem = generate_email_message("Write a new daily poem")
+    poem = generate_email_message("Write a short cozy romantic poem about moon")
 
     data = {
         "sender": {

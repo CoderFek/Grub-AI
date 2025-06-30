@@ -4,7 +4,8 @@ from typing import Annotated
 
 from api.db import get_session
 from api.models import Subscriber
-from api.ai.schemas import SubscriptionRequest, SubscriptionResponse
+from api.email_utils import generate_email_message
+from api.ai.schemas import SubscriptionRequest, SubscriptionResponse, EmailMessageSchema, PoemRequest
 from api.email_utils import send_verification_email
 
 router = APIRouter()
@@ -43,11 +44,15 @@ def verify_email(token: str, session: Annotated[Session, Depends(get_session)]):
     if not subscriber:
         raise HTTPException(status_code=400, detail="Invalid token")
 
-    if subscriber.verified:
+    if subscriber.is_verified:
         return {"message": "Already verified"}
 
-    subscriber.verified = True
+    subscriber.is_verified = True
     session.add(subscriber)
     session.commit()
 
     return {"message": "Email verified successfully"}
+
+@router.post("/test-poem", response_model=EmailMessageSchema)
+def test_poem(payload: PoemRequest):
+    return generate_email_message(payload.message)
