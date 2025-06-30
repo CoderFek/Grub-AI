@@ -1,0 +1,23 @@
+ai-poem-app/
+├── backend/
+    |──src/
+    │   ├── main.py                  # FastAPI app
+    │   ├── models.py                # SQLModel DB models
+    │   ├── schemas.py               # Pydantic request/response
+    │   ├── db.py                    # DB connection & session
+    │   ├── email_utils.py           # Brevo integration
+    │   ├── poem_generator.py        # LangChain + LLM logic
+    │   ├── background.py            # Daily job to send poems
+    │   ├── routes/
+    │       └── subscribe.py         # Email subscription routes
+    |── requirements.txt
+│   ├── Dockerfile
+│
+├── static_html/                 # Frontend (Tailwind)
+│   ├── src/
+│   │   └── index.html
+│   └── static.Dockerfile
+│
+├── docker-compose.yml          # Services: backend, db, static
+|── README.md
+└── .env                     # Configs (API keys, DB URL)
