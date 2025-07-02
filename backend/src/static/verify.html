@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Email Verified</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="max-w-md w-full">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-bold mb-2">✅ Email Verified</h2>
+        <p class="text-sm text-gray-600">Now choose how often you want to receive poems.</p>
+      </div>
+      <form id="frequency-form" class="space-y-5 bg-white p-6 border border-gray-200 rounded shadow">
+        <div>
+          <label class="block text-sm font-medium mb-1">Email</label>
+          <input type="text" id="email" name="email" readonly class="w-full px-4 py-3 border border-gray-300 rounded bg-gray-100 text-sm cursor-not-allowed" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Frequency</label>
+          <select name="frequency" required class="w-full px-4 py-3 border border-gray-300 rounded text-sm focus:outline-none focus:border-purple-600">
+            <option value="">-- Choose --</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+          Confirm & Continue
+        </button>
+        <p id="form-response" class="text-sm text-gray-700 mt-2"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="verify.js"></script>
+</body>
+</html>

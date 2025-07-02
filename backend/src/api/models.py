@@ -17,3 +17,4 @@ class Subscriber(SQLModel, table=True):
     is_verified: bool = Field(default=False)
     verification_token: str = Field(default_factory=generate_token)
     subscribed_at: datetime = Field(default_factory=utcnow)
+    frequency: Optional[str] = Field(default=None)  # "daily" or "weekly"
