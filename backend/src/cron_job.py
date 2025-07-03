@@ -34,7 +34,8 @@ def run_cron(session: Session):
         if should_send_today(sub):
             theme = random.choice(themes)
             try:
-                poem = generate_email_message(theme)
+                prompt = f"Write a short cozy poem about {theme.lower()}"
+                poem = generate_email_message(prompt)
                 send_poem_email(sub.email, poem)
                 print(f"✅ Sent poem to {sub.email} [Theme: {theme}]")
             except Exception as e:

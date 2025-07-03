@@ -1,8 +1,9 @@
 import os
 import requests
-from api.ai.poem_service import generate_email_message
+
 from datetime import datetime
 from api.models import Subscriber
+from api.ai.schemas import EmailMessageSchema
 
 
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
@@ -65,7 +66,7 @@ def send_welcome_email(to_email: str, frequency: str, subscribed_at: datetime):
             "email": BREVO_SENDER_EMAIL
         },
         "to": [{"email": to_email}],
-        "subject": "🎉 Welcome to Daily AI Poems!",
+        "subject": "🎉 Thank you for subscribing!",
         "htmlContent": html_content
     }
 
@@ -81,15 +82,13 @@ def send_welcome_email(to_email: str, frequency: str, subscribed_at: datetime):
         raise RuntimeError(f"❌ Failed to send welcome email: {response.status_code} - {response.text}")
     
 
-def send_poem_email(subscriber: Subscriber) -> None:
-    poem = generate_email_message("Write a short cozy romantic poem about moon")
-
+def send_poem_email(to_email: str, poem: EmailMessageSchema) -> None:
     data = {
         "sender": {
             "name": BREVO_SENDER_NAME,
             "email": BREVO_SENDER_EMAIL
         },
-        "to": [{"email": subscriber.email}],
+        "to": [{"email": to_email}],
         "subject": poem.subject,
         "textContent": poem.content
     }
@@ -107,4 +106,6 @@ def send_poem_email(subscriber: Subscriber) -> None:
     )
 
     if response.status_code >= 400:
-        raise RuntimeError(f"Failed to send poem email: {response.status_code} - {response.text}")
+        raise RuntimeError(
+            f"Failed to send poem email: {response.status_code} - {response.text}"
+        )
