@@ -15,7 +15,7 @@ if not BREVO_API_KEY or not BREVO_SENDER_EMAIL:
 
 def send_verification_email(subscriber: Subscriber) -> None:
     token = subscriber.verification_token
-    verify_link = f"http://{DOMAIN}/verify.html?token={token}"
+    verify_link = f"{DOMAIN}/verify.html?token={token}"
 
     data = {
         "sender": {

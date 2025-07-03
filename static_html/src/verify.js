@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const token = urlParams.get("token");
     const emailInput = document.getElementById("email");
     const responseText = document.getElementById("form-response");
+    const domain = "https://grub-poem-ai.onrender.com";
   
     if (!token) {
       responseText.textContent = "Missing token.";
@@ -11,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   
     try {
-      const res = await fetch(`http://localhost:8080/api/verify-email?token=${token}`);
+      const res = await fetch(`${domain}/api/verify-email?token=${token}`);
       const data = await res.json();
   
       if (!res.ok) {
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const formData = new FormData(form);
         const body = new URLSearchParams(formData);
   
-        const res = await fetch("http://localhost:8080/set-frequency", {
+        const res = await fetch(`${domain}/set-frequency`, {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           body: body
