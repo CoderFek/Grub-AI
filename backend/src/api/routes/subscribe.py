@@ -4,7 +4,6 @@ from typing import Annotated
 
 from api.db import get_session
 from api.models import Subscriber
-from api.email_utils import generate_email_message
 from api.ai.schemas import SubscriptionRequest, SubscriptionResponse, EmailMessageSchema, PoemRequest
 from api.email_utils import send_verification_email
 from api.email_utils import send_welcome_email
@@ -80,7 +79,3 @@ def set_frequency(
     )
 
     return {"message": "Frequency set successfully."}
-
-@router.post("/test-poem", response_model=EmailMessageSchema)
-def test_poem(payload: PoemRequest):
-    return generate_email_message(payload.message)
