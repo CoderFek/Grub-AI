@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from sqlmodel import Session, select
 from api.db import get_session
 from api.models import Subscriber
-from api.ai.poem_service import generate_poem
+from api.ai.poem_service import generate_email_message
 from api.email_utils import send_poem_email
 import random
 
@@ -34,7 +34,7 @@ def run_cron(session: Session):
         if should_send_today(sub):
             theme = random.choice(themes)
             try:
-                poem = generate_poem(theme)
+                poem = generate_email_message(theme)
                 send_poem_email(sub.email, poem)
                 print(f"✅ Sent poem to {sub.email} [Theme: {theme}]")
             except Exception as e:
