@@ -21,6 +21,7 @@ fadeEls.forEach(el => observer.observe(el));
 const form = document.getElementById("subscribe-form");
 const emailInput = document.getElementById("email-input");
 const responseMessage = document.getElementById("response-message");
+const domain = "https://grub-poem-ai.onrender.com"
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -36,7 +37,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("http://localhost:8080/subscribe", {
+    const res = await fetch(`${domain}/subscribe`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
