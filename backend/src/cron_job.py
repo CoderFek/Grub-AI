@@ -9,7 +9,7 @@ from api.email_utils import send_poem_email
 import random
 
 themes = [
-    "Moon", "Romance", "Rain", "Nature", "Stars", "Inspirational", "Sunset"
+    "Moon", "Romance", "Rain", "Nature", "Stars", "Inspirational", "Sunset", "Twilight"
 ]
 
 
@@ -36,7 +36,7 @@ def run_cron(session: Session):
             try:
                 prompt = f"Write a short cozy poem about {theme.lower()}"
                 poem = generate_email_message(prompt)
-                send_poem_email(sub.email, poem)
+                send_poem_email(sub.email, poem, theme, sub.frequency)
                 print(f"✅ Sent poem to {sub.email} [Theme: {theme}]")
             except Exception as e:
                 print(f"❌ Failed to send to {sub.email}: {e}")

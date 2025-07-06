@@ -82,15 +82,21 @@ def send_welcome_email(to_email: str, frequency: str, subscribed_at: datetime):
         raise RuntimeError(f"❌ Failed to send welcome email: {response.status_code} - {response.text}")
     
 
-def send_poem_email(to_email: str, poem: EmailMessageSchema) -> None:
+def send_poem_email(to_email: str, poem: EmailMessageSchema, theme: str, frequency: str) -> None:
     data = {
         "sender": {
             "name": BREVO_SENDER_NAME,
             "email": BREVO_SENDER_EMAIL
         },
         "to": [{"email": to_email}],
-        "subject": poem.subject,
-        "textContent": poem.content
+        "templateId": 2,
+        "params": {
+            "subject": poem.subject,
+            "poem": poem.content.replace("\n", "<br>"),
+            "theme": theme,
+            "frequency": frequency,
+            "email": to_email
+        }
     }
 
     headers = {
