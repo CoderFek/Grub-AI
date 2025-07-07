@@ -44,11 +44,13 @@ Poems are delivered based on user-defined frequency:
   
 - A poem is generated and emailed to the user
 
-  ![image](https://github.com/user-attachments/assets/c1bd671d-cf3c-4be4-aa85-52ab00fecb61)
+  ![image](https://github.com/user-attachments/assets/d53fbb0a-d543-4931-8c65-c40fda481920)
+
+
 
 
 
 The cron job is triggered via:
 
-- A secure FastAPI route: `/run-poem-cron?key=YOUR_SECRET`
+- A secure FastAPI route: `/run-poem-cron?key=SECRET`
 - GitHub Actions (daily schedule)
